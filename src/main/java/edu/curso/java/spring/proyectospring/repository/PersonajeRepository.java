@@ -19,7 +19,12 @@ public interface PersonajeRepository extends CrudRepository<Personaje, Long> {
 	@Query(value = "select p from Personaje p where p.nombre like %:nombre%")
 	public List<Personaje> buscarPersonajes(@Param("nombre") String nombre);
 	
-	@Query(value = "select p from Personaje as p where p.pelicula.id = ?1")
+	//@Query(value = "select p from Personaje as p where p.pelicula.id = ?1")
+	//public List<Personaje> recuperarPersonajePorPelicula(Long id);
+	
+	@Query(value = "select * from Personajes p where p.pelicula_id = ?1", nativeQuery = true)
 	public List<Personaje> recuperarPersonajePorPelicula(Long id);
+	
+	//public List<Personaje> ordenarPersonajesPor
 
 }

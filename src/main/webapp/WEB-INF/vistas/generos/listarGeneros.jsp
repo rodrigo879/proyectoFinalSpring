@@ -6,8 +6,6 @@
 
 <jsp:include page="/WEB-INF/vistas/template_superior.jsp"></jsp:include>
 
-<h1>Listado de generos <a style="color:black" href="/generos/nuevo" class="btn btn-warning">Nuevo</a></h1>
-
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.btn-borrar').on('click', function(event) {
@@ -22,12 +20,33 @@
 		});
 	});	
 </script>
+<style>
+	h1 {
+		display: inline
+	}
+	th {
+		text-align: center;
+	}
+	td {
+		text-align: center;
+		vertical-align: middle;
+	}
+	.top-container {
+		display: flex;
+		align-items: center;
+	}
+</style>
+
+<div class="top-container">
+	<h1>Listado de generos <a style="color:black" href="/generos/nuevo" class="btn btn-warning">Nuevo</a></h1>
+</div>
+
 <table class="table table-striped table-bordered">
 	<thead class="thead-dark">
 		<tr>
-			<th>Id</th>
+			<th style="width: 50px">Id</th>
 			<th>Nombre</th>
-			<th></th>
+			<th style="width: 230px"></th>
 		</tr>
 	</thead>
 	<c:forEach items="${generos}" var="g">
@@ -37,7 +56,8 @@
 			<td>
 				<a href="/generos/${g.id}" class="btn btn-primary">Ver</a>&nbsp;
 				<a href="/generos/${g.id}/editar" class="btn btn-success">Editar</a>&nbsp;
-				<a href="/generos/${g.id}/borrar" class="btn btn-danger btn-borrar">Borrar</a></td>
+				<a href="/generos/${g.id}/borrar" class="btn btn-danger btn-borrar">Borrar</a>
+			</td>
 		</tr>
 	</c:forEach>
 </table>

@@ -1,13 +1,13 @@
 package edu.curso.java.spring.proyectospring.mvc;
 
 import java.io.*;
+
 import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import edu.curso.java.spring.proyectospring.bo.Pelicula;
 import edu.curso.java.spring.proyectospring.bo.Personaje;
 import edu.curso.java.spring.proyectospring.mvc.form.PersonajeForm;
+import edu.curso.java.spring.proyectospring.service.PeliculaService;
 import edu.curso.java.spring.proyectospring.service.PersonajeException;
 import edu.curso.java.spring.proyectospring.service.PersonajeService;
 
@@ -27,10 +28,24 @@ public class PersonajesController {
 	@Autowired
 	private PersonajeService personajeService;
 	
+	@Autowired
+	private PeliculaService peliculaService;
+	
 	@GetMapping
 	public String listarPersonaje(Model model) { 
+		this.cargarPeliculas(model);
 		List<Personaje> personajes = personajeService.buscarPersonajes();
 		model.addAttribute("personajes", personajes);
+		model.addAttribute("personajeForm", new PersonajeForm());
+		return "/personajes/listarPersonajes";
+	}
+	
+	@GetMapping("/pelicula/{id}")
+	public String filtrarPersonajesPorPelicula(Model model,@PathVariable Long id) {
+		this.cargarPeliculas(model);
+		List<Personaje> personajes = personajeService.buscarPersonajesPorPelicula(id);		
+		model.addAttribute("personajes", personajes);
+		model.addAttribute("personajeForm", new PersonajeForm());
 		return "/personajes/listarPersonajes";
 	}
 	
@@ -91,11 +106,14 @@ public class PersonajesController {
 			} else {
 				personaje = personajeService.buscarPersonajePorId(idPersonaje);
 			}
+			
+			Pelicula pelicula = peliculaService.buscarPeliculaPorId(personajeForm.getIdPelicula());
 				
 			personaje.setNombre(personajeForm.getNombre());
 			personaje.setEdad(personajeForm.getEdad());
 			personaje.setHistoria(personajeForm.getHistoria());
 			personaje.setPeso(personajeForm.getPeso());
+			personaje.setPelicula(pelicula);
 			
 			String originalName = personajeForm.getFoto().getOriginalFilename();
 			String extensionFile = ".";

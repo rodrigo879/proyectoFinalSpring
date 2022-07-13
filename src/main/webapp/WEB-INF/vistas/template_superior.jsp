@@ -29,7 +29,7 @@
 				    url: '/api/peliculas/',
 				    data: function (params) {
 				        var query = {
-				          titulo: params.term
+				          nombre: params.term
 				        };
 				        return query;
 				    },
@@ -62,9 +62,6 @@
 		    	<img style="width:100%" src="/image/imagenLogo.png">
 		    </div>
 	    </a>
-	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-	      <span class="navbar-toggler-icon"></span>
-	    </button>
 	    <div class="collapse navbar-collapse" id="navbarCollapse">
 	      <ul class="navbar-nav mr-auto">
 	        <li class="nav-item">
@@ -77,7 +74,7 @@
 	          <a class="nav-link" href="<c:url value="/generos"/>">Generos</a>
 	        </li>
 	      </ul>
-	      <form class="form-inline mt-2 mt-md-0">
+	      <form class="form-inline mt-2 mt-md-0" action="/peliculas/ver">
 	      	<select id="select-autocomplete-peliculas"></select>
 	      </form>
 	    </div>
