@@ -68,25 +68,6 @@ public class PersonajesController {
 		return "/personajes/formPersonajes";
 	}
 	
-	/*@GetMapping(value="/recuperar-foto/{id}", produces = MediaType.ALL_VALUE)
-	public @ResponseBody byte[] recuperarFotoPersonaje(@PathVariable Long id) {
-		Personaje personaje = personajeService.buscarPersonajePorId(id);
-		
-		if(personaje != null) {
-			File archivoImagen = new File("C:/Rodrigo/Kolektor/proyecto-spring-final/src/main/webapp/image/" + personaje.getImagen());
-			if(archivoImagen.exists()) {
-				try(FileInputStream in = new FileInputStream(archivoImagen)) {
-					return in.readAllBytes();
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-			}
-		}
-		return null;
-	}*/
-	
-	//para ver la imagen en el form ir a /personajes/recuperar-foto/{id}
-	
 	@PostMapping("/guardar")
 	public String guardarPersonaje(@Valid @ModelAttribute(name = "personajeForm") PersonajeForm personajeForm, BindingResult bindingResult, Model model, @RequestParam("foto") MultipartFile foto) {
 		if(bindingResult.hasErrors()) {

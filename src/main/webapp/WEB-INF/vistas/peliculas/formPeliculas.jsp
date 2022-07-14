@@ -15,7 +15,7 @@
 
 	<h1>Formulario de peliculas</h1>
 
-	<form:form method="post" action="/guardar" modelAttribute="peliculaForm" id="form-peliculas">
+	<form:form method="post" action="/personajes/guardar" modelAttribute="peliculaForm" id="form-peliculas">
 
 		<div class="form-group">
 			<label>Id</label>

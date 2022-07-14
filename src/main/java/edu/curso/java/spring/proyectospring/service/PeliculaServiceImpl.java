@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import edu.curso.java.spring.proyectospring.repository.PeliculaRepository;
 
 @Service
 @Transactional
+@PreAuthorize("hasRole('USER')")
 public class PeliculaServiceImpl implements PeliculaService {
 
 	@Autowired
@@ -42,17 +44,20 @@ public class PeliculaServiceImpl implements PeliculaService {
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN')")
 	public Long altaPelicula(Pelicula pelicula, Long id) throws PeliculaException {
 		peliculaRepository.save(pelicula);
 		return pelicula.getId();
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN')")
 	public void borrarPelicula(Long id) {
 		peliculaRepository.deleteById(id);
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN')")
 	public void actualizarPelicula(Pelicula pelicula) {
 		peliculaRepository.save(pelicula);
 	}

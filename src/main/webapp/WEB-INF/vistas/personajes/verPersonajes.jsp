@@ -9,7 +9,7 @@
 
 
 <div class="card">
-  <h5 class="card-header">Personaje: ${personajes.nombre}</h5>
+  <h5 class="card-header">Personaje: ${personajes.nombre} <a href="/personajes/${p.id}/editar" class="btn btn-success">Editar</a></h5> 
   <div class="card-body">
   	<div style="width:150px">
 		<img style="width:100%" src="/image/${personajes.imagen}" alt="${personajes.imagen}"> 

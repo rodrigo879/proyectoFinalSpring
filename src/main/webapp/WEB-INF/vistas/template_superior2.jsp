@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -65,15 +64,7 @@
 		    	<img style="width:100%" src="/image/imagenLogo.png">
 		    </div>
 	    </a>
-	    <sec:authorize access="!isAuthenticated()">
-	   		<ul class="navbar-nav mr-auto">
-		        <li class="nav-item">
-		          <a class="nav-link" href="<c:url value="/users/login"/>">Login</a>
-		        </li>
-		 	</ul>
-	 	</sec:authorize>
 	    <div class="collapse navbar-collapse" id="navbarCollapse">
-	    	<sec:authorize access="isAuthenticated()">
 		      <ul class="navbar-nav mr-auto">
 		        <li class="nav-item">
 		          <a class="nav-link" href="<c:url value="/peliculas"/>">Peliculas</a>
@@ -84,15 +75,11 @@
 		        <li class="nav-item">
 		          <a class="nav-link" href="<c:url value="/generos"/>">Generos</a>
 		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" href="<c:url value="/logout"/>">Cerrar Sesion de <sec:authentication property="principal.username"/></a>
-		        </li>
 		      </ul>
 		      
 		      <form method="post" class="form-inline mt-2 mt-md-0" action="/" id="form-pelicula">
 		      	<select id="select-autocomplete-peliculas"></select>
 		      </form>
-			 </sec:authorize>
 	    </div>
 	  </nav>
 	</header>

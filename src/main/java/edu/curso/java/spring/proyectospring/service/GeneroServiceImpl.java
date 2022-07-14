@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import edu.curso.java.spring.proyectospring.repository.GeneroRepository;
 
 @Service
 @Transactional
+@PreAuthorize("hasRole('USER')")
 public class GeneroServiceImpl implements GeneroService {
 
 	@Autowired
@@ -37,17 +39,20 @@ public class GeneroServiceImpl implements GeneroService {
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN')")
 	public Long altaGenero(Genero genero) {
 		generoRepository.save(genero);
 		return genero.getId();
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN')")
 	public void borrarGenero(Long id) {
 		generoRepository.deleteById(id);
 	}
 	
 	@Override
+	@PreAuthorize("hasRole('ADMIN')")
 	public void actualizarGenero(Genero genero) {
 		generoRepository.save(genero);
 	}

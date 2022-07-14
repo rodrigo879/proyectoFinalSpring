@@ -36,6 +36,18 @@ public class PeliculaRestController {
 		return ResponseEntity.ok(peliculaDTO);
 	}
 	
+	@GetMapping(path = "/buscar")
+	public ResponseEntity<List<PeliculaDTO>> buscarPeliculas(@RequestParam String titulo) {
+		
+		List<Pelicula> peliculas = peliculaService.buscarPeliculas(titulo);
+		List<PeliculaDTO> peliculaDTO  = new ArrayList<PeliculaDTO>();
+		for (Pelicula p : peliculas) {
+			peliculaDTO.add(new PeliculaDTO(p));
+		}
+		return ResponseEntity.ok(peliculaDTO);
+		
+	}
+	
 	@GetMapping
 	public ResponseEntity<List<PeliculaDTO>> buscarPeliculas(){
 		List<Pelicula> peliculas = peliculaService.buscarPeliculas();

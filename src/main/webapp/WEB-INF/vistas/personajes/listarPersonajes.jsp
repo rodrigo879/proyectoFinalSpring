@@ -50,7 +50,7 @@
 </style>
 
 <div class="top-container">
-	<h1>Listado de Personajes <a style="color:black" href="/personajes/nuevo" class="btn btn-warning">Nuevo</a></h1>
+	<h1>Listado de Personajes <a style="color:black; border-radius: 50%" href="/personajes/nuevo" class="btn btn-success"><i class="fa-solid fa-circle-plus"></i></a></h1>
 	
 	<form:form method="post" action="/personajes/pelicula" modelAttribute="personajeForm" id="form-personaje">
 	 	<form:select path="idPelicula" cssClass="form-control" id="select-peliculas">
@@ -69,7 +69,7 @@
 			<th class="cabecera-tabla">Peso</th>
 			<th>Historia</th>
 			<th style="width: 150px">Pelicula</th>
-			<th style="width:230px"></th>
+			<th></th>
 		</tr>
 	</thead>
 	<c:forEach items="${personajes}" var="p">
@@ -77,7 +77,9 @@
 		
 			<td>
 				<div style="width:50px">
-					<img style="width:100%" src="/image/${p.imagen}" alt="${p.imagen}"> 
+					<a href="/personajes/${p.id}">
+						<img style="width:100%" src="/image/${p.imagen}" alt="${p.imagen}">
+					</a> 
 				</div>
 			</td>
 			<td style="text-align:center; vertical-align:middle">${p.nombre}</td>
@@ -86,10 +88,9 @@
 			<td style="text-align:left; vertical-align:middle">${p.historia}</td>
 			<td style="text-align:center; vertical-align:middle">${p.pelicula.titulo}</td>
 			
-			<td style="width:230px">
-				<a href="/personajes/${p.id}" class="btn btn-primary">Ver</a>&nbsp;
-				<a href="/personajes/${p.id}/editar" class="btn btn-success">Editar</a>&nbsp;
-				<a href="/personajes/${p.id}/borrar" class="btn btn-danger btn-borrar">Borrar</a>
+			<td>
+				<a href="/personajes/${p.id}/borrar" class="btn btn-danger btn-borrar"><i class="fa-solid fa-trash-can"></i></a>
+				
 			</td>
 		</tr>
 	</c:forEach>

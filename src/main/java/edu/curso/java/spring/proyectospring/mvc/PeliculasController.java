@@ -2,6 +2,8 @@ package edu.curso.java.spring.proyectospring.mvc;
 
 import java.util.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ import edu.curso.java.spring.proyectospring.service.PeliculaService;
 import edu.curso.java.spring.proyectospring.service.PersonajeService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/peliculas")
 public class PeliculasController {
 	
 	@Autowired
@@ -33,13 +35,15 @@ public class PeliculasController {
 	private GeneroService generoService;
 	
 	@GetMapping
-	public String listarPeliculas(Model model) { 
+	public String listarPeliculas(HttpServletRequest request, Model model) { 
+		HttpSession session = request.getSession();
+		String texto = (String) session.getAttribute("texto");
 		List<Pelicula> peliculas = peliculaService.buscarPeliculas();
 		model.addAttribute("peliculas", peliculas);
 		return "/peliculas/listarPeliculas";
 	}
 	
-	@GetMapping("/peliculas/{id}")
+	@GetMapping("/{id}")
 	public String verPeliculas(Model model, @PathVariable Long id) {
 		Pelicula peliculas = peliculaService.buscarPeliculaPorId(id);
 		List<Personaje> personajes = personajesService.buscarPersonajesPorPelicula(id);
@@ -94,7 +98,7 @@ public class PeliculasController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("peliculas/{id}/editar")
+	@GetMapping("/{id}/editar")
 	public String editarPelicula(Model model, @PathVariable Long id) {
 		Pelicula pelicula = peliculaService.buscarPeliculaPorId(id);
 		PeliculaForm peliculaForm = new PeliculaForm();
